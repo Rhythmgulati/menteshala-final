@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./dash.css">
+    <link rel="stylesheet" href="./chat.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <title>Chat</title>
+</head>
+<body>
+<div class="container-box">
+    <div class="left-box">
+         <div class="loader">
+                    <span class="loader-text">Welcome...</span>
+                    </div>
+        <img src="./logo.jpg" alt="" width="100%" height="30%">
+    
+  
+   <a href="/dashboard">Dashboard</a>
+    <a href="/mentors">Mentors</a>
+    <a href="/find">Other Mentors</a>
+    <a href="/chatmentee">Chat Room</a>
+    <a href="/logout">Logout</a>
+
+
+    </div>
+    <div class="right-box">
+      <div class="banner">
+        <img src="./chat.png" alt="">
+
+      </div>
+       <div class="outer-box">
+
+       <div class="chat-box" id="chat-box">
+        
+            
+       </div>
+       <div class="action-send">
+
+        <input type="text" id="msg" placeholder="Message" >
+       <button class="send" id="send">Send</button>
+
+       </div>
+
+    </div>
+    
+     
+      
+
+   
+     </div>
+
+
+
+
+   <script src="/socket.io/socket.io.js"></script>
+   <script>
+  
+  const socket = io();
+
+// Emit 'user-connected' event when the user connects
+socket.emit('user-connected', $.cookie('usermail'));
+
+// Event listener for receiving messages from the server
+socket.on('server-message', (msg,id) => {
+    const div = document.getElementById('chat-box');
+    div.innerHTML += `
+     <p style ="color:green; height:20px" >${id}</p>
+    <p class="chat-msg" style="background-color: blue ; color:white">${msg}</p>`;
+});
+
+const send = document.getElementById('send');
+
+send.addEventListener('click', () => {
+    const msg = document.getElementById('msg').value;
+    const id = $.cookie('usermail'); // Assuming this is the recipient's email
+    socket.emit('user-message', { msg, id }); // Emit 'user-message' event with message and recipient's email
+       const value = document.getElementById('msg')
+       value.value = ''
+    // Display the sent message locally
+    
+});
+
+   </script>
+    
+</body>
+</html>

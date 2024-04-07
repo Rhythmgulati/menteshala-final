@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./dash.css">
+    <link rel="stylesheet" href="./mentor.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+
+    <title>Mentor</title>
+</head>
+<body>
+<div class="container-box">
+    <div class="left-box">
+         <div class="loader">
+                    <span class="loader-text">Welcome...</span>
+                    </div>
+        <img src="./logo.jpg" alt="" width="100%" height="30%">
+    
+    <a href="/dashboard">Dashboard</a>
+    <a href="/mentors">Mentors</a>
+    <a href="/find">Other Mentors</a>
+    <a href="/chatmentee">Chat</a>
+    <a href="/logout">Logout</a>
+
+
+    </div>
+    <div class="right-box">
+      <div class="banner">
+        <img src="./chat.png" alt="">
+
+      </div>
+      <div class="outer-container">
+          {{#each mentors}}
+         <div class="card-3">
+          <img src="./man.png" alt="">
+          <p>{{fname}} {{lname}}</p>
+          <p>Experience : {{exp}}</p>
+          <div class="action-btn">
+            <p id="status">{{status}}</p>
+      
+           <button onclick="send('{{ email }}')">Request</button>
+
+          </div>
+          {{/each}}
+
+         </div>
+      </div>
+     
+       
+
+     
+
+    </div>
+
+    </div>
+
+</div>    
+    
+
+
+
+    <script>
+
+function send(email) {
+  fetch('/request_mentor', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email: email }),
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json(); // Parse response as JSON
+  })
+  .then(data => {
+    console.log(data); // Output the response data
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+  });
+}
+
+
+    </script>
+    
+</body>
+</html>

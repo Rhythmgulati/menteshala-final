@@ -1,0 +1,47 @@
+.outer-box{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.outer-box button{
+    border-radius: 15px;
+    height: 25px;
+    width: 60px;
+    border: none;
+    color: white;
+    background-color: aquamarine;
+    
+}
+
+.action-send{
+    margin-top: 5px;
+}
+
+.chat-box{
+    background-color: rgb(224, 228, 228);
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    overflow-y: scroll ;
+    text-align: center;
+    border-radius: 15px;
+    border: solid 1px black;
+}
+
+.chat-msg{
+    width: 90%;
+    border-radius: 15px;
+    height: 30px;
+    text-align: left;
+    padding: 8px;
+}
+
+::-webkit-scrollbar{
+    visibility: hidden;
+}

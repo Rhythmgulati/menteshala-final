@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./dash.css">
+    <title>Request</title>
+</head>
+<body>
+<div class="container-box">
+    <div class="left-box">
+         <div class="loader">
+                    <span class="loader-text">Welcome...</span>
+                    </div>
+        <img src="./logo.jpg" alt="" width="100%" height="30%">
+    
+  
+      <a href="/mentordash">Dashboard</a>
+    <a href="/request">Request</a>
+    <a href="/chatmentor">Chat Room</a>
+    <a href="/logout">Logout</a>
+
+
+    </div>
+    <div class="right-box">
+      <div class="banner">
+       <a href="/request"><img src="./chat.png" alt=""></a> 
+
+      </div>
+
+      <div class="outer-container">
+      {{#each user.request}}
+    <div class="card-3">
+        <img height="40px" width="40px" src="./man.png" alt="">
+       
+        <div class="action-btn">
+            <p id="status">{{this}}</p> 
+            <button onclick="send('{{this}}')">Chat</button>
+        </div>
+    </div>
+{{/each}}
+
+      </div>
+
+      
+  
+      </div>
+
+    </div>
+    
+
+   <script>
+
+function send(email){
+  
+  localStorage.setItem('email',email)
+  window.location.href = '/chatmentor'
+
+}
+
+
+
+   </script>
+   
+    
+</body>
+</html>
